@@ -20,3 +20,6 @@ class ModelInput(BaseModel):
     parch: int
     fare: float
     embarked: Journey 
+
+class ModelOutput(BaseModel):
+    output: str

@@ -3,10 +3,9 @@ from fastapi import FastAPI
 from fastapi.templating import Jinja2Templates
 from joblib import load
 from input_model import ModelInput
-
-
-from input_model import Gender
+# from input_model import Gender
 from func import check_prediction, convert_gender, journey_embarked
+from input_model import ModelOutput
 
 app = FastAPI()
 
@@ -24,7 +23,7 @@ async def predict(data:ModelInput):
     fare = float(data_input["fare"])
     embarked = journey_embarked(data_input["embarked"])
     prediction = check_prediction(log_model.predict([[pclass, sex, age, sibsp, parch, fare, embarked]]).tolist()[0])
-    return {"prediction":prediction}
+    return ModelOutput(output= prediction)
 
 
 
